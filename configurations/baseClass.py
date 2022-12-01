@@ -111,6 +111,18 @@ class BaseClass:
             raise error
 
     @staticmethod
+    def is_page_loaded(by, web_element):
+        try:
+            element = Context.driver.find_element(by, web_element)
+            WebDriverWait(Context.driver, 10).until(wait.presence_of_element_located((by, web_element)))
+            presence_of_value = element.is_displayed()
+            log.info(f'Successfully checked web-element is displayed: {web_element}')
+            return presence_of_value
+        except Exception as error:
+            log.error('Unable to clear text', error)
+            raise error
+
+    @staticmethod
     def is_element_clickable(by, web_element):
         try:
             WebDriverWait(Context.driver, 10).until(wait.element_to_be_clickable((by, web_element)))

@@ -10,6 +10,9 @@ class BestLiveCasinoSitsPage:
     __count = 0
     __testData = ''
 
+    def __page_load(self):
+        BaseClass.is_page_loaded(By.CSS_SELECTOR, self.__play_now_locator)
+
     def get_href_value(self):
         _dir = os.getcwd()
         self.__testData = _dir.replace('testCases', 'testData')

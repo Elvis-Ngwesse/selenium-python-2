@@ -56,6 +56,8 @@ def setup(request):
         # Lock current thread execution
         lock = Lock()
         lock.acquire()
+
+        # If test status is testsfailed? Take a screenshot
         test_exit_status = request.node.session.testsfailed
         if test_exit_status == 1:
             BaseClass.take_screenshot(test_name)

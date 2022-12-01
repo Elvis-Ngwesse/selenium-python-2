@@ -7,6 +7,9 @@ class IrelandPage:
     __search_locator = "[placeholder='Search Gambling.com']"
     __dropdown_locator = "ul[class*='search']>li>a"
 
+    def __page_load(self):
+        BaseClass.is_page_loaded(By.CSS_SELECTOR, self.__h1_locator)
+
     def h1_tag_exists(self):
         boolean_result = BaseClass.element_is_visible(By.CSS_SELECTOR, self.__h1_locator)
         return boolean_result

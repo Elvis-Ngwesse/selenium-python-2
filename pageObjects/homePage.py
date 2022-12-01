@@ -8,6 +8,9 @@ class HomePage:
     text_irish_online_locator = "//*[contains(text(),'Gambling.com expertly reviews and compares all Irish online " \
                                 "gambling operators')] "
 
+    def __page_load(self):
+        BaseClass.is_page_loaded(By.CSS_SELECTOR, self.countries_locator)
+
     def expand_countries_dropdown(self):
         BaseClass.element_hover_over(By.CSS_SELECTOR, self.countries_locator)
 
