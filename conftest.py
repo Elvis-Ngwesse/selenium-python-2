@@ -6,17 +6,19 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.edge.service import Service as EdgeService
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-from utilities.readProperties import ReadConfig
+
+from pageObjects.greenKartPage import GreenKartPage
+from utils.readProperties import ReadConfig
 import pytest
 from configurations.context import Context
 from selenium.webdriver.chrome.options import Options
-from configurations.baseClass import BaseClass
+from src.baseClass import BaseClass
 from allure_commons.types import AttachmentType
 from pytest_harvest import saved_fixture
 import os
 import glob
 from threading import Lock
-from utilities.customLogger import LogGeneration
+from utils.customLogger import LogGeneration
 
 log = LogGeneration.loggen()
 
@@ -24,7 +26,12 @@ log = LogGeneration.loggen()
 @pytest.fixture(autouse=True)
 @saved_fixture  # to save all instances created. access using fixture_store
 def setup(request):
+    """
+    Initialises test run
+    :param request: Gets test context
+    """
     try:
+
         options = Options()
         bool_object = ReadConfig.get_headless()
         options.headless = bool_object

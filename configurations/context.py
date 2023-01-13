@@ -1,6 +1,10 @@
 class Context(type):
 
     def content(cls):
+        """
+        Stores object instances in Context
+        :return: Returns the stored object
+        """
         return {key: value for key, value in cls.__dict__.items()
                 if not key.startswith('_') and key != 'content'}
 
