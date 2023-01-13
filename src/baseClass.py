@@ -1,6 +1,7 @@
 import time
 
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as wait
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
@@ -353,6 +354,25 @@ class BaseClass:
             BaseClass.element_wait(by=by, web_element=web_element)
             WebDriverWait(Context.driver, 10).until(wait.element_to_be_clickable((by, web_element)))
             log.info(f'Successfully checked web-element clickable: {web_element}')
+        except Exception as error:
+            log.error(error)
+            raise error
+
+    @staticmethod
+    def select_from_drop_down_by_text(by, web_element, text: str):
+        """
+        This function selects from dropdown
+        :param text:
+        :param by: method to locate web-element
+        :param web_element: locator
+        """
+        try:
+            BaseClass.element_wait(by=by, web_element=web_element)
+            element = Context.driver.find_element(by, web_element)
+            element.click()
+            display_dropdown = Select(element)
+            display_dropdown.select_by_visible_text(text=text)
+            log.info(f'Successfully selected element from drop-down')
         except Exception as error:
             log.error(error)
             raise error

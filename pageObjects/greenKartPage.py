@@ -14,6 +14,16 @@ class GreenKartPage:
     def click_on_top_deals(self):
         BaseClass.element_click(By.CSS_SELECTOR, self.__top_deal)
 
+    def click_on_book_me_a_flight(self):
+        BaseClass.element_click(By.CSS_SELECTOR, self.__flight_booking)
+
+    def click_on_cart(self):
+        BaseClass.element_click(By.CSS_SELECTOR, self.__cart_icon)
+
+    def click_on_add_to_cart_button(self, index: int):
+        add_cart = lambda _index: f"div[class='products-wrapper']>div>div:nth-child({_index})>div[class='product-action']>button"
+        BaseClass.element_click(By.CSS_SELECTOR, add_cart(_index=index))
+
     def navigate_to_offers_page(self):
         BaseClass.switch_to_new_window(1)
 
