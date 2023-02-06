@@ -1,7 +1,7 @@
 import json
 import os
 from pathlib import Path
-
+import fcntl
 from utils.rapper_function import func_loger
 
 BASE_PATH = Path.cwd().joinpath('data')
@@ -33,7 +33,9 @@ def write_files(payload: object, data_file: str):
     """
     try:
         with open(os.path.join(ROOT_DIR, f"data/{data_file}.json"), encoding="utf-8", mode='w') as json_data:
+            fcntl.flock(json_data, fcntl.LOCK_SH)
             json.dump(payload, json_data)
+            fcntl.flock(json_data, fcntl.LOCK_UN)
     except IOError as error:
         raise error
 

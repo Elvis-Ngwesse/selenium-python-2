@@ -6,8 +6,6 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.edge.service import Service as EdgeService
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-
-from pageObjects.greenKartPage import GreenKartPage
 from utils.readProperties import ReadConfig
 import pytest
 from configurations.context import Context
