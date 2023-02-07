@@ -76,8 +76,8 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
-/screenshots
-/reports
+screenshots/
+reports/
 # IPython
 profile_default/
 ipython_config.py
