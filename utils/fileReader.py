@@ -60,3 +60,9 @@ def update_json_file(_file_name: str, *arg):
     except Exception as error:
         return error
     return payload
+
+
+@func_loger
+def get_feature_file_path(file_name: str):
+    feature_file = os.path.join(ROOT_DIR, f"testCases/features/{file_name}.feature")
+    return feature_file

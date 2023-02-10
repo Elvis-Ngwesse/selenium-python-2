@@ -6,6 +6,7 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.edge.service import Service as EdgeService
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
+from pageObjects.greenKartPage import GreenKartPage
 from utils.readProperties import ReadConfig
 import pytest
 from configurations.context import Context
@@ -73,3 +74,21 @@ def setup(request):
     except Exception as error:
         log.error(error)
         raise error
+
+
+@pytest.fixture()
+def navigate_to_green_kart_page():
+    green_kart_page = GreenKartPage()
+    Context.green_kart_page = green_kart_page
+
+
+@pytest.fixture()
+def navigate_to_offers():
+    green_kart_page = Context.green_kart_page
+    green_kart_page.navigate_to_offers_page()
+
+
+@pytest.fixture()
+def top_deals():
+    green_kart_page = Context.green_kart_page
+    green_kart_page.click_on_top_deals()

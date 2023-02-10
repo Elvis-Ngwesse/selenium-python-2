@@ -4,10 +4,12 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as wait
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, InvalidElementStateException, \
+    StaleElementReferenceException
 from configurations.context import Context
 from utils.customLogger import LogGeneration
 import os
+
 log = LogGeneration.loggen()
 
 
@@ -247,8 +249,8 @@ class BaseClass:
             element_to_click = Context.driver.find_element(by, web_element)
             element_to_click.click()
             log.info(f'Successfully clicked on web-element: {web_element}')
-        except Exception as error:
-            if NoSuchElementException in error:
+        except (NoSuchElementException, InvalidElementStateException, StaleElementReferenceException):
+            try:
                 element_to_hover = Context.driver.find_element(by, web_element)
                 hover = ActionChains(Context.driver).move_to_element(element_to_hover)
                 hover.perform()
@@ -256,9 +258,9 @@ class BaseClass:
                 element_to_click = Context.driver.find_element(by, web_element)
                 element_to_click.click()
                 log.info(f'Successfully clicked on web-element: {web_element}')
-            else:
-                log.error(error)
-                raise error
+            except:
+                log.error(Exception)
+                raise Exception
 
     @staticmethod
     def element_wait(by, web_element):

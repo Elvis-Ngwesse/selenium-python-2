@@ -19,13 +19,13 @@ Install requirements.txt
 Run Tests
 **********************
 - cd testCases
-- cd steps
+- cd tests
 - pytest
 
 ****************************
 Run Tests with allure report
 ****************************
 - cd testCases
-- cd steps
-- pytest --alluredir=reports test_steps_veg_count.py
+- cd tests
+- pytest --alluredir=reports test_deals.py
 - allure serve reports
